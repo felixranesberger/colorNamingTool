@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer align-bottom justify-center">
     <slot />
     <p class="notice">
       Press the
@@ -33,10 +33,6 @@ export default defineComponent({
 <style lang="scss">
 
 .footer {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
   color: #2c3e50;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <h1>Hi! I'm
+  <h2>Hi! I'm
     <span
       class="colorHighlight"
       :style="style"
@@ -9,7 +9,7 @@
     </span>
 
     <emoji-switch :color="colorHexValue"/>
-  </h1>
+  </h2>
 </template>
 
 <script>
