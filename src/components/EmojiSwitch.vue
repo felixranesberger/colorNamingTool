@@ -1,12 +1,12 @@
 <template>
   <img
     v-show="isValidColor"
-    src="src/assets/emoji_worked.png"
+    src="@/assets/emoji_worked.png"
     alt="memoji happy"
   />
   <img
     v-show="!isValidColor"
-    src="src/assets/emoji_not_working.png"
+    src="@/assets/emoji_not_working.png"
     alt="memoji sad"
   />
 </template>
