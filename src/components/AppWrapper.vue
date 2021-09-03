@@ -41,7 +41,7 @@ export default defineComponent({
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(black, 60%);
+      background-color: rgba(black, 75%);
       content: '';
       z-index: 50;
     }

@@ -3,6 +3,7 @@
     :is-color-picker-hidden="isColorPickerHidden"
     @click.self="deactivateColorPicker"
   >
+
     <ColorPicker
       v-show="!isColorPickerHidden"
       :color="colorName"
@@ -12,21 +13,19 @@
       @changeColor="updateColor"
     />
 
-    <h1>Hi! I'm
-      <span
-        class="colorHighlight"
-        :style="highlightStyle"
-        @click="toggleColorPicker"
-      >
-        {{ colorName }}
-      </span>
-      <emoji-switch :color="colorHexValue" />
-    </h1>
+    <app-title
+      :color-name="colorName"
+      :color-hex-value="colorHexValue"
+      :style="highlightStyle"
+      @closeColorPicker="toggleColorPicker"
+    />
+
     <button-copy-color
       :color-name="colorName"
       :color-hex-value="colorHexValue"
       :style="highlightStyle"
     />
+
     <footer-notice />
   </app-wrapper>
 </template>
@@ -36,8 +35,8 @@ import { ColorPicker } from 'vue-color-kit';
 import chroma from 'chroma-js';
 import 'vue-color-kit/dist/vue-color-kit.css';
 import AppWrapper from './components/AppWrapper.vue';
-import EmojiSwitch from './components/EmojiSwitch.vue';
 import ButtonCopyColor from './components/ButtonCopyColor.vue';
+import AppTitle from './components/AppTitle.vue';
 import FooterNotice from './components/FooterNotice.vue';
 
 export default {
@@ -45,8 +44,8 @@ export default {
   components: {
     ColorPicker,
     AppWrapper,
-    EmojiSwitch,
     ButtonCopyColor,
+    AppTitle,
     FooterNotice,
   },
   computed: {
@@ -114,6 +113,7 @@ export default {
     },
     toggleColorPicker() {
       this.isColorPickerHidden = !this.isColorPickerHidden;
+      console.log(1630674292857, !this.isColorPickerHidden);
     },
   },
   mounted() {
@@ -133,6 +133,11 @@ body {
 
 body {
   background-color: #F8FAFD;
+  color: #2c3e50;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
   max-height: 100vh;
 }
 
@@ -143,14 +148,6 @@ body {
 .colorpicker {
   position: absolute;
   z-index: 100;
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 h1 {
