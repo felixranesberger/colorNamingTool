@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-color-kit": "^1.0.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -22,6 +23,8 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^7.0.0",
+    "sass": "^1.39.0",
+    "sass-loader": "^10.2.0",
     "vue-cli-plugin-vite": "~1.4.6"
   }
 }
