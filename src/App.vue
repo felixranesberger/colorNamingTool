@@ -100,9 +100,9 @@ export default {
       if (this.isColorPickerHidden) {
         if (this.isColorValid(this.colorHexValue)) {
           const strippedColor = this.colorHexValue.replace('#', '');
-          const data = await fetch(`https://api.color.pizza/v1/${strippedColor}`)
+          const data = await fetch(`https://www.thecolorapi.com/id?hex=${strippedColor}`)
             .then((response) => (response.status === 200 ? response.json() : false));
-          this.colorName = data.colors[0].name;
+          this.colorName = data.name.value;
         } else {
           this.colorName = 'not a valid color';
         }

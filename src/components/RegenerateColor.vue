@@ -25,7 +25,7 @@ export default defineComponent({
   }
 
   &:hover svg {
-    transform: rotate(-40deg);
+    transform: rotate(-28deg);
   }
 }
 </style>
