@@ -62,7 +62,7 @@ export default {
       ];
     },
     highlightStyle() {
-      if (chroma.valid(this.colorHexValue)) {
+      if (this.isColorValid(this.colorHexValue)) {
         const isDark = chroma(this.colorHexValue)
           .get('lab.l') < 70;
         return {
@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       colorName: '',
-      colorHexValue: '#EEEEEE',
+      colorHexValue: this.generateRandomColor(),
       isColorPickerHidden: true,
     };
   },
@@ -89,7 +89,7 @@ export default {
   methods: {
     async fetchColorName() {
       if (this.isColorPickerHidden) {
-        if (chroma.valid(this.colorHexValue)) {
+        if (this.isColorValid(this.colorHexValue)) {
           const strippedColor = this.colorHexValue.replace('#', '');
           const data = await fetch(`https://api.color.pizza/v1/${strippedColor}`)
             .then((response) => (response.status === 200 ? response.json() : false));
@@ -98,6 +98,9 @@ export default {
           this.colorName = 'not a valid color';
         }
       }
+    },
+    isColorValid(color) {
+      return chroma.valid(color);
     },
     updateColor(data) {
       this.colorHexValue = data.hex;
@@ -113,10 +116,16 @@ export default {
     },
     toggleColorPicker() {
       this.isColorPickerHidden = !this.isColorPickerHidden;
-      console.log(1630674292857, !this.isColorPickerHidden);
+    },
+    generateRandomColor() {
+      const rdmColor = Math.floor(Math.random() * 16777215).toString(16);
+      if (this.isColorValid(rdmColor)) {
+        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+      }
+      return this.generateRandomColor();
     },
   },
-  mounted() {
+  created() {
     this.fetchColorName();
   },
 };
