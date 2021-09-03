@@ -34,7 +34,6 @@
 <script>
 import { ColorPicker } from 'vue-color-kit';
 import chroma from 'chroma-js';
-import 'vue-color-kit/dist/vue-color-kit.css';
 import AppWrapper from './components/AppWrapper.vue';
 import ButtonCopyColor from './components/ButtonCopyColor.vue';
 import AppTitle from './components/AppTitle.vue';
@@ -136,6 +135,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~vue-color-kit/dist/vue-color-kit.css";
 $warning: #FC462B;
 
 html,
