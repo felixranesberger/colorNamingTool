@@ -26,11 +26,13 @@
         alt="memoji sad"
       />
     </h1>
+    <button @click="copyToClipboard">Copy me</button>
   </div>
 </template>
 
 <script>
 import { ColorPicker } from 'vue-color-kit';
+import useClipboard from 'vue-clipboard3';
 import 'vue-color-kit/dist/vue-color-kit.css';
 
 export default {
@@ -50,6 +52,9 @@ export default {
         '#0A1919',
         '#2862E9',
       ];
+    },
+    copyValue() {
+      return `$${this.camelize(this.name)}: ${this.color};`;
     },
   },
   data() {
@@ -96,6 +101,16 @@ export default {
         this.fetchColorName();
       }
     },
+    camelize(str) {
+      return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
+        if (+match === 0) return '';
+        return index === 0 ? match.toLowerCase() : match.toUpperCase();
+      });
+    },
+    copyToClipboard() {
+      const { toClipboard } = useClipboard();
+      toClipboard(this.copyValue);
+    },
   },
   mounted() {
     this.fetchColorName();
@@ -130,6 +145,28 @@ body {
     background-color: rgba(black, 60%);
     content: '';
     z-index: 50;
+  }
+}
+
+button {
+  padding: .8rem 3rem;
+  border: none;
+  border-radius: 3rem;
+  background-color: #FEDF00;
+  font-weight: bold;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  animation:  slide-top 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite;
+}
+
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
