@@ -1,13 +1,8 @@
 <template>
   <img
     v-show="isValidColor"
-    src="@/assets/emoji_worked.png"
+    :src="require(`@/assets/${imagePath}`)"
     alt="memoji happy"
-  />
-  <img
-    v-show="!isValidColor"
-    src="@/assets/emoji_not_working.png"
-    alt="memoji sad"
   />
 </template>
 
@@ -24,6 +19,18 @@ export default defineComponent({
     },
   },
   computed: {
+    imagePath() {
+      const positiveImages = [
+        '1.png',
+        '2.png',
+        '3.png',
+        '4.png',
+      ];
+
+      return this.isValidColor
+        ? positiveImages[Math.floor(Math.random() * positiveImages.length)]
+        : '5.png';
+    },
     isValidColor() {
       return chroma.valid(this.color);
     },
