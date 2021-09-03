@@ -1,7 +1,12 @@
 <template>
-  <p class="notice">
-    Press the <strong>colored box</strong> to change the color
-  </p>
+  <footer class="footer">
+    <slot />
+    <p class="notice">
+      Press the
+      <strong :style="boldStyle">colored box </strong>
+      to change the color
+    </p>
+  </footer>
 </template>
 
 <script>
@@ -9,12 +14,25 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'FooterNotice',
+  props: {
+    colorHexValue: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    boldStyle() {
+      return {
+        color: this.colorHexValue,
+      };
+    },
+  },
 });
 </script>
 
 <style lang="scss">
 
-.notice {
+.footer {
   position: absolute;
   bottom: 2rem;
   left: 50%;

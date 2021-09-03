@@ -25,8 +25,9 @@
       :color-hex-value="colorHexValue"
       :style="highlightStyle"
     />
-
-    <footer-notice />
+    <footer-notice :color-hex-value="colorHexValue">
+      <regenerate-color @click="this.colorHexValue = this.generateRandomColor()" />
+    </footer-notice>
   </app-wrapper>
 </template>
 
@@ -37,6 +38,7 @@ import 'vue-color-kit/dist/vue-color-kit.css';
 import AppWrapper from './components/AppWrapper.vue';
 import ButtonCopyColor from './components/ButtonCopyColor.vue';
 import AppTitle from './components/AppTitle.vue';
+import RegenerateColor from './components/RegenerateColor.vue';
 import FooterNotice from './components/FooterNotice.vue';
 
 export default {
@@ -47,6 +49,7 @@ export default {
     ButtonCopyColor,
     AppTitle,
     FooterNotice,
+    RegenerateColor,
   },
   computed: {
     colorPickerDefaultColors() {
