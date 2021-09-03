@@ -25,6 +25,7 @@ export default defineComponent({
         '2.png',
         '3.png',
         '4.png',
+        '6.png',
       ];
 
       return this.isValidColor

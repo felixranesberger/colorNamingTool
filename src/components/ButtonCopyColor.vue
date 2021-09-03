@@ -37,6 +37,7 @@ export default defineComponent({
     copyToClipboard() {
       const { toClipboard } = useClipboard();
       toClipboard(this.copyValue);
+      this.$emit('activateAlert');
     },
     camelize(str) {
       return str.replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1, p2) => {

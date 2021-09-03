@@ -24,10 +24,13 @@
       :color-name="colorName"
       :color-hex-value="colorHexValue"
       :style="highlightStyle"
+      @activateAlert="activateAlert"
     />
     <footer-notice :color-hex-value="colorHexValue">
       <regenerate-color @click="this.colorHexValue = this.generateRandomColor()" />
     </footer-notice>
+
+    <alert text="Copied color to clipboard" :active="activeAlert" />
   </app-wrapper>
 </template>
 
@@ -39,6 +42,7 @@ import ButtonCopyColor from './components/ButtonCopyColor.vue';
 import AppTitle from './components/AppTitle.vue';
 import RegenerateColor from './components/RegenerateColor.vue';
 import FooterNotice from './components/FooterNotice.vue';
+import Alert from './components/Alert.vue';
 
 export default {
   name: 'App',
@@ -49,6 +53,7 @@ export default {
     AppTitle,
     FooterNotice,
     RegenerateColor,
+    Alert,
   },
   computed: {
     colorPickerDefaultColors() {
@@ -82,6 +87,7 @@ export default {
       colorName: '',
       colorHexValue: this.generateRandomColor(),
       isColorPickerHidden: true,
+      activeAlert: false,
     };
   },
   watch: {
@@ -126,6 +132,14 @@ export default {
         return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
       }
       return this.generateRandomColor();
+    },
+    activateAlert() {
+      if (!this.activeAlert) {
+        this.activeAlert = true;
+        setTimeout(() => {
+          this.activeAlert = false;
+        }, 1500);
+      }
     },
   },
   created() {
