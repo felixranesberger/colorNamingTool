@@ -14,7 +14,11 @@
     />
 
     <h1>Hi! I'm
-      <pre @click="isColorPickerHidden = !isColorPickerHidden">{{ name }}</pre>
+      <span
+        class="colorHighlight"
+        :style="highlightStyle"
+        @click="isColorPickerHidden = !isColorPickerHidden"
+      >{{ name }}</span>
       <img
         v-show="isValidColor"
         src="src/assets/emoji_worked.png"
@@ -26,13 +30,23 @@
         alt="memoji sad"
       />
     </h1>
-    <button @click="copyToClipboard">Copy me</button>
+    <button
+      class="button"
+      :style="highlightStyle"
+      @click="copyToClipboard"
+    >
+      Copy me
+    </button>
   </div>
+  <p class="notice">
+    Press the <strong>colored box</strong> to change the color
+  </p>
 </template>
 
 <script>
 import { ColorPicker } from 'vue-color-kit';
 import useClipboard from 'vue-clipboard3';
+import chroma from 'chroma-js';
 import 'vue-color-kit/dist/vue-color-kit.css';
 
 export default {
@@ -56,10 +70,18 @@ export default {
     copyValue() {
       return `$${this.camelize(this.name)}: ${this.color};`;
     },
+    highlightStyle() {
+      const isDark = chroma(this.color)
+        .get('lab.l') < 70;
+      return {
+        backgroundColor: this.color,
+        color: isDark ? 'white' : 'inherit',
+      };
+    },
   },
   data() {
     return {
-      color: '#8db33c',
+      color: '#EEEEEE',
       name: '',
       isValidColor: false,
       isColorPickerHidden: true,
@@ -72,13 +94,10 @@ export default {
   },
   methods: {
     async fetchColorName() {
-      console.log(1630657709719, this.isColorPickerHidden);
       if (this.isColorPickerHidden) {
         const strippedColor = this.color.replace('#', '');
         const data = await fetch(`https://api.color.pizza/v1/${strippedColor}`)
           .then((response) => (response.status === 200 ? response.json() : false));
-
-        console.log(1630601571129, data);
 
         if (data && this.color.length > 0) {
           this.name = data.colors[0].name;
@@ -89,22 +108,19 @@ export default {
         }
       }
     },
-    updateColor(color) {
-      console.log(1630654717546, 'test');
-      console.log(1630654680509, color);
-      this.color = color.hex;
+    updateColor(data) {
+      this.color = data.hex;
     },
     deactivateColorPicker() {
-      console.log(1630656948611, 'true');
       if (!this.isColorPickerHidden) {
         this.isColorPickerHidden = true;
         this.fetchColorName();
       }
     },
     camelize(str) {
-      return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
-        if (+match === 0) return '';
-        return index === 0 ? match.toLowerCase() : match.toUpperCase();
+      return str.replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1, p2) => {
+        if (p2) return p2.toUpperCase();
+        return p1.toLowerCase();
       });
     },
     copyToClipboard() {
@@ -119,6 +135,7 @@ export default {
 </script>
 
 <style lang="scss">
+$yellow: #FEDF00;
 
 html,
 body {
@@ -148,14 +165,19 @@ body {
   }
 }
 
-button {
+.button {
   padding: .8rem 3rem;
   border: none;
   border-radius: 3rem;
-  background-color: #FEDF00;
+  background-color: $yellow;
   font-weight: bold;
   box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
   animation:  slide-top 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite;
+  cursor: pointer;
+
+  &:hover {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes slide-top {
@@ -173,14 +195,6 @@ button {
 .colorpicker {
   position: absolute;
   z-index: 100;
-}
-
-input {
-  padding: 15px 40px;
-  border-radius: 8px;
-  border: none;
-  background-color: lightgrey;
-  font-weight: bold;
 }
 
 #app {
@@ -202,17 +216,21 @@ h1 {
   display: flex;
   font-weight: bold;
   font-size: 70px;
+  align-items: center;
 }
 
-pre {
+.colorHighlight {
   margin: 0 0 0 1.5rem;
   display: inline-block;
   position: relative;
   padding: 5px 25px;
-  background-color: #FEDF00;
+  background-color: $yellow;
+  transition: all ease-in .2s,  width 0.25s;
 
   &:hover {
     cursor: pointer;
+    background-color: darken($yellow, 2%);
+    transform: scale(.99);
    }
 }
 
@@ -220,5 +238,13 @@ img {
   margin-left: .4rem;
   height: 96px;
   width: auto;
+}
+
+.notice {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #2c3e50;
 }
 </style>
