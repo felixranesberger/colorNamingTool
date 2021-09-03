@@ -68,9 +68,10 @@ export default {
       if (this.isColorValid(this.colorHexValue)) {
         const isDark = chroma(this.colorHexValue)
           .get('lab.l') < 70;
+
         return {
-          backgroundColor: this.colorHexValue,
           color: isDark ? 'white' : 'inherit',
+          backgroundColor: this.colorHexValue,
         };
       }
 
