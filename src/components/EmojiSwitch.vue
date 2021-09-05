@@ -6,15 +6,15 @@
   />
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import chroma from 'chroma-js';
 
 export default defineComponent({
   name: 'EmojiSwitch',
   props: {
     color: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
   },

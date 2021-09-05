@@ -12,8 +12,8 @@
   </h2>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import EmojiSwitch from './EmojiSwitch.vue';
 
 export default defineComponent({
@@ -23,11 +23,11 @@ export default defineComponent({
   },
   props: {
     colorName: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     colorHexValue: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     style: {
@@ -36,7 +36,7 @@ export default defineComponent({
     },
   },
   methods: {
-    emitClick() {
+    emitClick(): void {
       this.$emit('closeColorPicker');
     },
   },

@@ -8,19 +8,19 @@
   </button>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import useClipboard from 'vue-clipboard3';
 
 export default defineComponent({
   name: 'ButtonCopyColor',
   props: {
     colorName: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     colorHexValue: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     style: {

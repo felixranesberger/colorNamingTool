@@ -5,14 +5,14 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'RegenerateColor',
   props: {
     colorHexValue: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
   },

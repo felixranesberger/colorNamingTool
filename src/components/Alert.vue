@@ -1,23 +1,26 @@
 <template>
   <transition name="fade">
-    <container container-classes="alertwrapper" v-show="active">
+    <container
+      v-show="active"
+      container-classes="alertwrapper"
+    >
       <p class="alert">{{ text }}</p>
     </container>
   </transition>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Alert',
   props: {
     active: {
-      type: Boolean,
+      type: Boolean as PropType<boolean>,
       default: false,
     },
     text: {
-      type: String,
+      type: String as PropType<string>,
       default: '',
     },
   },

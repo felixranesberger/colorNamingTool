@@ -4,14 +4,14 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'AppWrapper',
   props: {
     isColorPickerHidden: {
-      type: Boolean,
+      type: Boolean as PropType<boolean>,
       required: true,
     },
   },

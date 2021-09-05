@@ -9,14 +9,14 @@
   </footer>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'FooterNotice',
   props: {
     colorHexValue: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
   },
