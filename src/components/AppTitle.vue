@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import EmojiSwitch from './EmojiSwitch.vue';
+import EmojiSwitch from '@/components/EmojiSwitch.vue';
 
 export default defineComponent({
   name: 'AppTitle',

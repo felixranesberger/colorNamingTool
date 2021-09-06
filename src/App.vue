@@ -47,13 +47,13 @@ import { defineComponent } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import chroma from 'chroma-js';
 import { State, ColorPickerData } from '@/interfaces';
-import HeaderLogo from './components/HeaderLogo.vue';
-import AppWrapper from './components/AppWrapper.vue';
-import AppTitle from './components/AppTitle.vue';
-import ButtonCopyColor from './components/ButtonCopyColor.vue';
-import RegenerateColor from './components/RegenerateColor.vue';
-import FooterNotice from './components/FooterNotice.vue';
-import Alert from './components/Alert.vue';
+import HeaderLogo from '@/components/HeaderLogo.vue';
+import AppWrapper from '@/components/AppWrapper.vue';
+import AppTitle from '@/components/AppTitle.vue';
+import ButtonCopyColor from '@/components/ButtonCopyColor.vue';
+import RegenerateColor from '@/components/RegenerateColor.vue';
+import FooterNotice from '@/components/FooterNotice.vue';
+import Alert from '@/components/Alert.vue';
 
 export default defineComponent({
   name: 'App',
