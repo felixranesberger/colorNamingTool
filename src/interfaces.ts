@@ -7,4 +7,15 @@ export interface State {
 
 export interface ColorPickerData {
   hex: string,
+  hsv: {
+    h: string,
+    s: string,
+    v: string,
+  },
+  rgba: {
+    a: string,
+    b: string,
+    g: string,
+    r: string,
+  },
 }
