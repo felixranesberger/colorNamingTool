@@ -20,18 +20,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.regenerateColor {
-  margin-bottom: 2.5rem;
-  cursor: pointer;
+  .regenerateColor {
+    margin-bottom: 2.5rem;
+    cursor: pointer;
 
-  svg {
-    width: 35px;
-    height: 35px;
-    transition: all ease-in .15s;
-  }
+    svg {
+      width: 35px;
+      height: 35px;
+      transition: all ease-in .15s;
+    }
 
-  &:hover svg {
-    transform: rotate(-28deg);
+    &:hover svg {
+      transform: rotate(-28deg);
+    }
   }
-}
 </style>

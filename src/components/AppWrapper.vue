@@ -16,7 +16,7 @@ export default defineComponent({
     },
   },
   computed: {
-    wrapperClasses() {
+    wrapperClasses(): Array<string | null> {
       return [
         'center',
         !this.isColorPickerHidden ? 'isActive' : null,

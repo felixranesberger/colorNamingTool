@@ -35,35 +35,40 @@
       />
     </footer-notice>
 
-    <alert text="Copied color to clipboard" :active="activeAlert" />
+    <alert
+      text="Copied color to clipboard"
+      :active="activeAlert"
+    />
   </app-wrapper>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import chroma from 'chroma-js';
+import { State, ColorPickerData } from '@/interfaces';
+import HeaderLogo from './components/HeaderLogo.vue';
 import AppWrapper from './components/AppWrapper.vue';
-import ButtonCopyColor from './components/ButtonCopyColor.vue';
 import AppTitle from './components/AppTitle.vue';
+import ButtonCopyColor from './components/ButtonCopyColor.vue';
 import RegenerateColor from './components/RegenerateColor.vue';
 import FooterNotice from './components/FooterNotice.vue';
 import Alert from './components/Alert.vue';
-import HeaderLogo from './components/HeaderLogo.vue';
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     ColorPicker,
-    AppWrapper,
-    ButtonCopyColor,
-    AppTitle,
-    FooterNotice,
-    RegenerateColor,
-    Alert,
     HeaderLogo,
+    AppWrapper,
+    AppTitle,
+    ButtonCopyColor,
+    RegenerateColor,
+    FooterNotice,
+    Alert,
   },
   computed: {
-    colorPickerDefaultColors() {
+    colorPickerDefaultColors(): Array<string> {
       return [
         '#A5C85A',
         '#32DCE6',
@@ -75,7 +80,7 @@ export default {
         '#2862E9',
       ];
     },
-    highlightStyle() {
+    highlightStyle(): Array<string> | string {
       if (this.isColorValid(this.colorHexValue)) {
         const isDark = chroma(this.colorHexValue)
           .get('lab.l') < 70;
@@ -94,21 +99,19 @@ export default {
       return 'white';
     },
   },
-  data() {
-    return {
-      colorName: '',
-      colorHexValue: this.generateRandomColor(),
-      isColorPickerHidden: true,
-      activeAlert: false,
-    };
-  },
+  data: (): State => ({
+    colorName: '',
+    colorHexValue: '',
+    isColorPickerHidden: true,
+    activeAlert: false,
+  }),
   watch: {
     colorHexValue() {
       this.fetchColorName();
     },
   },
   methods: {
-    async fetchColorName() {
+    async fetchColorName(): Promise<void> {
       if (this.isColorPickerHidden) {
         if (this.isColorValid(this.colorHexValue)) {
           const strippedColor = this.colorHexValue.replace('#', '');
@@ -120,13 +123,13 @@ export default {
         }
       }
     },
-    isColorValid(color) {
+    isColorValid(color: string): boolean {
       return chroma.valid(color);
     },
-    updateColor(data) {
+    updateColor(data: ColorPickerData): void {
       this.colorHexValue = data.hex;
     },
-    deactivateColorPicker() {
+    deactivateColorPicker(): void {
       if (!this.isColorPickerHidden) {
         this.isColorPickerHidden = true;
         if (this.colorHexValue.charAt(0) !== '#') {
@@ -135,17 +138,17 @@ export default {
         this.fetchColorName();
       }
     },
-    toggleColorPicker() {
+    toggleColorPicker(): void {
       this.isColorPickerHidden = !this.isColorPickerHidden;
     },
-    generateRandomColor() {
+    generateRandomColor(): string {
       const rdmColor = Math.floor(Math.random() * 16777215).toString(16);
       if (rdmColor.length === 6) {
         return `#${rdmColor}`;
       }
       return this.generateRandomColor();
     },
-    activateAlert() {
+    activateAlert(): void {
       if (!this.activeAlert) {
         this.activeAlert = true;
         setTimeout(() => {
@@ -154,10 +157,11 @@ export default {
       }
     },
   },
-  created() {
+  created(): void {
+    this.colorHexValue = this.generateRandomColor();
     this.fetchColorName();
   },
-};
+});
 </script>
 
 <style lang="scss">

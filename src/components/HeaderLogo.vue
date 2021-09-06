@@ -13,13 +13,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-header {
-  position: absolute;
-  left: 2rem;
-  top: 2rem;
+  header {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
 
-  svg {
-    height: 25px;
+    svg {
+      height: 25px;
+    }
   }
-}
 </style>

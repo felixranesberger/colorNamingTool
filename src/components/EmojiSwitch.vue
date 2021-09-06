@@ -19,7 +19,7 @@ export default defineComponent({
     },
   },
   computed: {
-    imagePath() {
+    imagePath(): string {
       const positiveImages = [
         '1.png',
         '2.png',
@@ -32,7 +32,7 @@ export default defineComponent({
         ? positiveImages[Math.floor(Math.random() * positiveImages.length)]
         : '5.png';
     },
-    isValidColor() {
+    isValidColor(): boolean {
       return chroma.valid(this.color);
     },
   },

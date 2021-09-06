@@ -34,12 +34,12 @@ export default defineComponent({
     },
   },
   methods: {
-    copyToClipboard() {
+    copyToClipboard(): void {
       const { toClipboard } = useClipboard();
       toClipboard(this.copyValue);
       this.$emit('activateAlert');
     },
-    camelize(str) {
+    camelize(str: string): string {
       return str.replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1, p2) => {
         if (p2) return p2.toUpperCase();
         return p1.toLowerCase();

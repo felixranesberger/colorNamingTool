@@ -31,8 +31,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
-.footer {
-  color: #2c3e50;
-}
+  .footer {
+    color: #2c3e50;
+  }
 </style>
